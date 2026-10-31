@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>あなただけが本物 | AI偽SNSゲーム v0</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#14181d;--sub:#5b6570;--line:#e3e7ec;--acc:#ff5c38;--acc2:#7c5cff;--good:#12a150;--bad:#e5484d;--gold:#f5a623}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;background:var(--bg);color:var(--ink);max-width:520px;margin:0 auto;min-height:100vh}
+button{font:inherit;cursor:pointer;border:none;border-radius:999px}
+input,textarea,select{font:inherit;width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+.hidden{display:none!important}
+/* invite */
+#invite{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:28px 22px;background:linear-gradient(160deg,#14181d,#2b2140 60%,#4a2130);color:#fff}
+.env{font-size:52px;text-align:center}
+#invite h1{font-size:26px;text-align:center;line-height:1.5;margin:14px 0 6px}
+#invite p.lead{text-align:center;color:#cfc8e6;font-size:14px;line-height:1.8;margin-bottom:26px}
+.card{background:var(--card);color:var(--ink);border-radius:18px;padding:20px;box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.card h2{font-size:16px;margin-bottom:12px}
+.card label{font-size:12px;color:var(--sub);display:block;margin:12px 0 5px}
+.tastes{display:grid;gap:8px;margin-top:6px}
+.taste{border:2px solid var(--line);border-radius:12px;padding:11px 13px;text-align:left;background:#fff;width:100%}
+.taste.sel{border-color:var(--acc2);background:#f2efff}
+.taste b{font-size:14px}.taste span{display:block;font-size:12px;color:var(--sub);margin-top:2px}
+.btn-main{background:var(--acc);color:#fff;font-weight:700;padding:14px;width:100%;font-size:16px;margin-top:18px}
+.btn-sub{background:transparent;color:#cfc8e6;border:1px solid #6b628c;padding:12px;width:100%;margin-top:10px}
+.btn-ghost{background:#eef0f3;color:var(--ink);padding:10px 16px;font-size:13px}
+.note{font-size:11px;color:#9a93b8;text-align:center;margin-top:16px;line-height:1.7}
+/* app */
+header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;z-index:5}
+.hrow{display:flex;align-items:center;gap:10px}
+.avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;flex:none;font-size:15px}
+.who{flex:1;min-width:0}.who b{font-size:15px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who span{font-size:12px;color:var(--sub)}
+.foll{text-align:right}.foll b{font-size:18px;display:block;line-height:1.1}.foll span{font-size:11px;color:var(--sub)}
+.stats{display:flex;gap:8px;margin-top:9px}
+.chip{flex:1;background:#f0f2f5;border-radius:10px;padding:7px 9px;font-size:12px;text-align:center}
+.chip b{font-size:14px}
+.trend{background:#14181d;color:#fff;font-size:12.5px;padding:8px 14px;white-space:nowrap;overflow:hidden}
+.trend b{color:var(--gold);margin-right:8px}
+main{padding:12px 12px 110px}
+.postbox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+.postbox textarea{border:none;padding:4px;resize:none;font-size:15px}
+.postbox textarea:focus{outline:none}
+.prow{display:flex;align-items:center;gap:8px;margin-top:6px}
+.count{font-size:12px;color:var(--sub);margin-left:auto}
+.btn-post{background:var(--acc);color:#fff;font-weight:700;padding:10px 22px}
+.btn-post:disabled{background:#c9ced6}
+.feedpost{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:10px}
+.fhead{display:flex;gap:9px;align-items:center;margin-bottom:7px}
+.fhead .avatar{width:34px;height:34px;font-size:13px}
+.fhead b{font-size:14px}.fhead span{font-size:12px;color:var(--sub);display:block}
+.badge{margin-left:auto;font-size:10.5px;padding:3px 8px;border-radius:999px;background:#f0f2f5;color:var(--sub);flex:none}
+.badge.fan{background:#ffe9e4;color:#c23c1d}.badge.anti{background:#fde8e8;color:#b3271e}.badge.media{background:#e7efff;color:#2456c4}.badge.critic{background:#efe9ff;color:#5b3ec9}
+.fbody{font-size:14.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word}
+.fmeta{display:flex;gap:18px;font-size:12.5px;color:var(--sub);margin-top:9px}
+.verdict{border-radius:12px;padding:11px 13px;font-size:14px;font-weight:700;margin:4px 0 10px;text-align:center}
+.verdict.normal{background:#eef6ff;color:#2456c4}.verdict.buzz{background:#fff3d6;color:#9a6200;border:1.5px solid var(--gold)}.verdict.flame{background:#fde8e8;color:#b3271e;border:1.5px solid var(--bad)}
+.comments{border-top:1px dashed var(--line);margin-top:10px;padding-top:9px;display:grid;gap:9px}
+.comment{display:flex;gap:8px;font-size:13.5px;line-height:1.55}
+.comment .avatar{width:28px;height:28px;font-size:11px}
+.comment b{font-size:13px}.comment span{color:var(--sub);font-size:11.5px}
+.rewindbar{display:flex;gap:8px;margin-bottom:12px}
+.rewindbar button{flex:1}
+/* overlay */
+#rush{position:fixed;inset:0;background:rgba(10,10,16,.88);z-index:20;display:flex;flex-direction:column;padding:60px 22px;color:#fff;overflow:hidden}
+#rush h2{font-size:24px;text-align:center;margin-bottom:6px}
+#rush .rsub{text-align:center;color:#ffb4ab;font-size:13px;margin-bottom:22px}
+#rush.buzz .rsub{color:#ffe1a1}
+.notif{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:12px 14px;margin-bottom:9px;font-size:14px;animation:pop .3s ease}
+@keyframes pop{from{transform:translateY(14px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+#rushClose{background:#fff;color:#14181d;font-weight:700;padding:14px;margin-top:auto}
+footer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:rgba(255,255,255,.94);border-top:1px solid var(--line);padding:9px 14px calc(9px + env(safe-area-inset-bottom));display:flex;gap:8px;z-index:5}
+footer button{flex:1;padding:11px;font-size:13.5px;background:#eef0f3}
+footer button.warn{color:var(--bad)}
+.small{font-size:11.5px;color:var(--sub);text-align:center;padding:0 16px 8px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- INVITE / CREATE -->
+<section id="invite">
+  <div class="env">✉️</div>
+  <h1>あなたは正式に<br>招待されました</h1>
+  <p class="lead">ここは、あなた以外は全員AIのSNS。<br>有名になるか、炎上するかは、あなたの投稿しだい。<br>— あなただけが本物 —</p>
+  <div class="card" id="createCard">
+    <h2>ペルソナを作る</h2>
+    <label>名前</label>
+    <input id="inName" maxlength="16" placeholder="例：駆け出しミント">
+    <label>ユーザーID（英数字）</label>
+    <input id="inHandle" maxlength="16" placeholder="例：mint_new">
+    <label>フォロワーの味付け</label>
+    <div class="tastes" id="tastes">
+      <button class="taste" data-t="fan"><b>🔥 熱狂ファン多め</b><span>褒められやすい。バズは大きいが、調子に乗ると…</span></button>
+      <button class="taste sel" data-t="balance"><b>⚖️ バランス</b><span>ファンもアンチもほどほど。標準の地獄。</span></button>
+      <button class="taste" data-t="spicy"><b>🌶 辛口・アンチ多め</b><span>何を言っても刺される。炎上耐性が試される。</span></button>
+    </div>
+    <button class="btn-main" id="btnStart">この世界に入る</button>
+  </div>
+  <button class="btn-sub hidden" id="btnContinue">▶ 続きからプレイ</button>
+  <p class="note">v0：ログインなし・端末内にだけ保存されます。<br>登場人物は全員、実在しないAIキャラです。</p>
+</section>
+
+<!-- APP -->
+<section id="app" class="hidden">
+  <header>
+    <div class="hrow">
+      <div class="avatar" id="myAv" style="background:#ff5c38">？</div>
+      <div class="who"><b id="myName">-</b><span id="myHandle">@-</span></div>
+      <div class="foll"><b id="myFoll">0</b><span>フォロワー</span></div>
+    </div>
+    <div class="stats">
+      <div class="chip">⚡ エネルギー <b id="myEnergy">5</b>/5</div>
+      <div class="chip">↩ Rewind 残り <b id="myRewind">2</b></div>
+      <div class="chip">🕛 回復 <b>翌0時</b></div>
+    </div>
+  </header>
+  <div class="trend" id="trend"><b>トレンド</b><span id="trendText">#新人クリエイター</span></div>
+  <main>
+    <div class="postbox">
+      <textarea id="composer" rows="3" maxlength="140" placeholder="いま何してる？ 投稿は1日5回まで。炎上してもRewindで巻き戻せる。"></textarea>
+      <div class="prow">
+        <button class="btn-ghost" id="btnHint">お題をもらう</button>
+        <span class="count"><span id="charCount">0</span>/140</span>
+        <button class="btn-post" id="btnPost">投稿する</button>
+      </div>
+    </div>
+    <div class="rewindbar">
+      <button class="btn-ghost" id="btnRewind">↩ 直前の投稿を巻き戻す</button>
+    </div>
+    <div id="feed"></div>
+    <p class="small">これはゲームです。フォロワーもコメントも、すべてAIが演じています。</p>
+  </main>
+  <footer>
+    <button id="btnFeed">🔄 フィード更新</button>
+    <button id="btnRank">📈 評判</button>
+    <button class="warn" id="btnReset">最初から</button>
+  </footer>
+</section>
+
+<!-- NOTIFICATION RUSH -->
+<section id="rush" class="hidden">
+  <h2 id="rushTitle">🔥 炎上中</h2>
+  <p class="rsub" id="rushSub">通知が止まらない…</p>
+  <div id="rushList"></div>
+  <button id="rushClose">フィードに戻る</button>
+</section>
+
+<script>
+"use strict";
+const KEY="aiFakeSnsV0";
+const CHARS=[
+ {n:"古参のタヌキ",h:"tanuki_old",t:"fan",c:"#8a5a2b"},
+ {n:"ミント推し活中",h:"mint_oshi",t:"fan",c:"#12a150"},
+ {n:"現場猫",h:"genba_neko",t:"fan",c:"#e8871e"},
+ {n:"辛口レビュー屋",h:"karakuchi",t:"critic",c:"#5b3ec9"},
+ {n:"数字で語る人",h:"data_man",t:"critic",c:"#2456c4"},
+ {n:"アンチ常駐",h:"anti_joshu",t:"anti",c:"#e5484d"},
+ {n:"揚げ足とり職人",h:"ageashi",t:"anti",c:"#b3271e"},
+ {n:"ネットニュース速報",h:"news_sokuho",t:"media",c:"#2456c4"},
+ {n:"界隈ウォッチャー",h:"watcher_k",t:"media",c:"#0f766e"},
+ {n:"ライバルのソラ",h:"sora_rival",t:"rival",c:"#7c5cff"},
+ {n:"通りすがりの一般人",h:"ippanjin",t:"fan",c:"#5b6570"},
+ {n:"深夜の住人",h:"shinya_junin",t:"anti",c:"#374151"}
+];
+const AI_POSTS=[
+ ["界隈ウォッチャー","watcher_k","media","今日の新人クリエイター界隈、誰がバズって誰が消えるか。毎日が総選挙。"],
+ ["ライバルのソラ","sora_rival","rival","新曲の断片あげた。再生数は聞くな。心で感じろ。"],
+ ["ネットニュース速報","news_sokuho","media","【速報】無名クリエイターの投稿が深夜に伸び続ける。本人は就寝中とみられる。"],
+ ["古参のタヌキ","tanuki_old","fan","この界隈、推しは推せるうちに推せ。引退は突然来る。"],
+ ["辛口レビュー屋","karakuchi","critic","今週の新人、技術は荒いが熱量だけは本物が2人いた。名前は伏せる。"],
+ ["現場猫","genba_neko","fan","今日も現場（タイムライン）にいます。よし！"],
+ ["数字で語る人","data_man","critic","フォロワー数は結果であって目的ではない。と言いながら全員数字を見ている。"],
+ ["深夜の住人","shinya_junin","anti","深夜のポエム投稿は翌朝スクショされる。法則。"]
+];
+const TRENDS=["#新人クリエイター","#今日のバズ","#界隈の闇","#推し活日記","#深夜のポエム注意報","#新人総選挙","#スクショは証拠"];
+const HINTS=["今日から本気出す。まずは毎日投稿から。絶対に有名になる。","新作できました！ 3ヶ月かけたので聞いてほしい","正直、昨日の投稿が伸びなかったの悔しい。でも続けます","ごめんなさい、昨日の発言は言い過ぎでした","質問です。みんなはスランプの時どうしてる？","支えてくれる人いつもありがとう。今日は感謝だけ伝えたい","ライバルがバズってて正直焦ってる。でも負けません"];
+const LINES={
+ fan:["これは伸びる匂いがする…！","推します。今日から古参を名乗ります","待ってました！ 通知ONにした","スクショ撮った。未来の貴重資料","こういう投稿が見たかった"],
+ anti:["で？","また始まった笑","伸びてないのに強気で草","こういうとこだよほんと","スクショは撮りました（意味深）"],
+ critic:["切り口は悪くない。あとは継続できるか","数字は正直まだ弱い。ただし熱量は本物","前回より構成が良くなっている。伸びしろあり","批評家ぶるわけじゃないが、これは評価されるべき","話題性はある。賛否が割れるタイプ"],
+ media:["【速報】新人クリエイターの投稿が界隈で話題に","【話題】投稿直後からコメント欄が動き続ける","【観測】フォロワー数の変動を確認。界隈ウォッチャーが注視","【まとめ】今日の新人界隈、主役はこの投稿かもしれない"],
+ rival:["ふーん、やるじゃん。こっちも負けないけど","それ、私も昨日やろうとしてたやつ…先越された","認めたくないけど今日のは良かった"]
+};
+let S=null, taste="balance", lastUsed={};
+function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+function pick(arr){return arr[rnd(0,arr.length-1)]}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a}
+function todayStr(){const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+function load(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return null}}
+function initial(name,handle,tz){return{name:name,handle:handle,taste:tz,followers:12,energy:5,rewind:2,day:todayStr(),posts:[],lastSnapshot:null,feedSeed:rnd(0,999)}}
+function refreshDay(){if(S&&S.day!==todayStr()){S.day=todayStr();S.energy=5;save()}}
+function esc(s){return s.replace(/[&<>"']/g,function(m){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]})}
+function avTxt(n){return n.slice(0,1)}
+function charAv(ch,size){return '<div class="avatar" style="background:'+ch.c+';width:'+size+'px;height:'+size+'px;font-size:'+Math.floor(size*0.4)+'px">'+avTxt(ch.n)+'</div>'}
+function badge(t){const m={fan:["fan","ファン"],anti:["anti","アンチ"],critic:["critic","批評家"],media:["media","メディア"],rival:["critic","ライバル"]};const x=m[t]||["",""];return '<span class="badge '+x[0]+'">'+x[1]+'</span>'}
+function detectType(txt){
+ if(/ごめん|謝罪|すみません|言い過ぎ/.test(txt))return"apology";
+ if(/絶対|最強|負けな|有名にな|喧嘩|炎上/.test(txt))return"provoke";
+ if(/お知らせ|始めました|公開|リリース|決定|できました/.test(txt))return"announce";
+ if(/質問|どうして|\?|？/.test(txt))return"question";
+ if(/ありがとう|感謝/.test(txt))return"thanks";
+ return"daily";
+}
+function react(txt){
+ const type=detectType(txt);
+ let pool=[];
+ CHARS.forEach(function(ch){pool.push(ch)});
+ let weights={fan:3,anti:2,critic:2,media:1,rival:1};
+ if(S.taste==="fan"){weights.fan=5;weights.anti=1}
+ if(S.taste==="spicy"){weights.anti=5;weights.fan=2}
+ if(type==="apology"){weights.anti=1;weights.fan=4}
+ if(type==="provoke"){weights.anti=4;weights.media=2}
+ let bag=[];
+ pool.forEach(function(ch){const w=weights[ch.t]||1;for(let i=0;i<w;i++)bag.push(ch)});
+ const chosen=[];const seen={};
+ shuffle(bag).forEach(function(ch){if(!seen[ch.h]&&chosen.length<rnd(3,6)){seen[ch.h]=1;chosen.push(ch)}});
+ let score=rnd(-16,32);
+ if(type==="provoke")score+=rnd(-20,30);
+ if(type==="announce")score+=rnd(0,18);
+ if(type==="apology")score+=rnd(-2,10);
+ if(type==="thanks")score+=rnd(2,12);
+ if(S.taste==="fan")score+=rnd(0,8);
+ if(S.taste==="spicy")score+=rnd(-6,2);
+ const scale=1+Math.floor(S.followers/120);
+ const likes=Math.max(0,Math.round((30+score*6+rnd(0,60))*scale));
+ const rps=Math.max(0,Math.round(likes*rnd(5,22)/100));
+ let delta=Math.round(score*scale*rnd(1,3)/2)+rnd(-3,6);
+ let verdict="normal";
+ if(score>=34){verdict="buzz";delta=Math.abs(delta)+rnd(20,80)*scale}
+ else if(score<=-8){verdict="flame";delta=-Math.abs(delta)-rnd(2,18)}
+ const comments=chosen.map(function(ch){
+   let kind=ch.t;
+   if(verdict==="buzz"&&kind==="anti")kind="critic";
+   if(verdict==="flame"&&kind==="fan")kind="anti";
+   if(kind==="rival")kind="rival";
+   const arr=LINES[kind]||LINES.fan;
+   let line=pick(arr);let guard=0;
+   while(lastUsed[ch.h]===line&&guard++<5)line=pick(arr);
+   lastUsed[ch.h]=line;
+   return{ch:ch,line:line};
+ });
+ return{verdict:verdict,likes:likes,rps:rps,delta:delta,comments:comments,type:type};
+}
+function renderHead(){
+ document.getElementById("myAv").textContent=avTxt(S.name);
+ document.getElementById("myName").textContent=S.name;
+ document.getElementById("myHandle").textContent="@"+S.handle;
+ document.getElementById("myFoll").textContent=S.followers.toLocaleString();
+ document.getElementById("myEnergy").textContent=S.energy;
+ document.getElementById("myRewind").textContent=S.rewind;
+ document.getElementById("trendText").textContent=shuffle(TRENDS).slice(0,3).join("　");
+}
+function feedHTML(){
+ let html="";
+ S.posts.forEach(function(p){
+   html+='<article class="feedpost"><div class="fhead"><div class="avatar" style="background:#ff5c38">'+avTxt(S.name)+'</div><div><b>'+esc(S.name)+'</b><span>@'+esc(S.handle)+' ・ あなたの投稿</span></div>'+badge("fan")+'</div>';
+   html+='<div class="fbody">'+esc(p.text)+'</div>';
+   if(p.result){
+     const v=p.result.verdict;
+     const label=v==="buzz"?"🚀 バズりました":(v==="flame"?"🔥 炎上しました":"📣 反応がつきました");
+     html+='<div class="verdict '+v+'">'+label+'　フォロワー '+(p.result.delta>=0?"+":"")+p.result.delta+'</div>';
+     html+='<div class="fmeta"><span>♥ '+p.result.likes.toLocaleString()+'</span><span>🔁 '+p.result.rps.toLocaleString()+'</span><span>💬 '+p.result.comments.length+'</span></div>';
+     html+='<div class="comments">';
+     p.result.comments.forEach(function(cm){
+       html+='<div class="comment">'+charAv(cm.ch,28)+'<div><b>'+esc(cm.ch.n)+'</b> <span>@'+cm.ch.h+'</span><br>'+esc(cm.line)+'</div></div>';
+     });
+     html+='</div>';
+   }
+   html+='</article>';
+ });
+ shuffle(AI_POSTS).slice(0,5).forEach(function(a){
+   const ch=CHARS.find(function(c){return c.h===a[1]})||CHARS[0];
+   html+='<article class="feedpost"><div class="fhead">'+charAv(ch,34)+'<div><b>'+esc(a[0])+'</b><span>@'+a[1]+'</span></div>'+badge(a[2])+'</div><div class="fbody">'+esc(a[3])+'</div><div class="fmeta"><span>♥ '+rnd(3,420)+'</span><span>🔁 '+rnd(0,60)+'</span></div></article>';
+ });
+ return html;
+}
+function render(){renderHead();document.getElementById("feed").innerHTML=feedHTML();
+ document.getElementById("btnPost").disabled=(S.energy<=0);
+ document.getElementById("btnRewind").disabled=!(S.lastSnapshot&&S.rewind>0);
+}
+function showApp(){document.getElementById("invite").classList.add("hidden");document.getElementById("app").classList.remove("hidden");refreshDay();render()}
+function showRush(result){
+ const rush=document.getElementById("rush");
+ rush.classList.remove("hidden");rush.classList.toggle("buzz",result.verdict==="buzz");
+ document.getElementById("rushTitle").textContent=result.verdict==="buzz"?"🚀 バズりました！":"🔥 炎上しています";
+ document.getElementById("rushSub").textContent=result.verdict==="buzz"?"フォロワーが押し寄せています":"通知が止まらない…（でも、これが一番の見せ場）";
+ const list=document.getElementById("rushList");list.innerHTML="";
+ const notes=["♥ いいねが "+result.likes.toLocaleString()+" 件つきました","🔁 "+result.rps.toLocaleString()+" 件リポストされました","👤 フォロワーが "+(result.delta>=0?"+":"")+result.delta+" 人になりました"];
+ result.comments.slice(0,3).forEach(function(cm){notes.push("💬 "+cm.ch.n+"："+cm.line)});
+ notes.forEach(function(n,i){setTimeout(function(){const d=document.createElement("div");d.className="notif";d.textContent=n;list.appendChild(d)},i*420)});
+}
+document.getElementById("tastes").addEventListener("click",function(e){
+ const b=e.target.closest(".taste");if(!b)return;
+ document.querySelectorAll(".taste").forEach(function(x){x.classList.remove("sel")});
+ b.classList.add("sel");taste=b.dataset.t;
+});
+document.getElementById("btnStart").addEventListener("click",function(){
+ const name=document.getElementById("inName").value.trim()||"名無しの新人";
+ const handle=(document.getElementById("inHandle").value.trim()||"new_creator").replace(/[^a-zA-Z0-9_]/g,"");
+ S=initial(name,handle,taste);save();showApp();
+});
+document.getElementById("btnContinue").addEventListener("click",function(){S=load();if(S)showApp()});
+document.getElementById("composer").addEventListener("input",function(e){document.getElementById("charCount").textContent=e.target.value.length});
+document.getElementById("btnHint").addEventListener("click",function(){
+ const ta=document.getElementById("composer");ta.value=pick(HINTS);
+ document.getElementById("charCount").textContent=ta.value.length;
+});
+document.getElementById("btnPost").addEventListener("click",function(){
+ const ta=document.getElementById("composer");const txt=ta.value.trim();
+ if(!txt){alert("投稿文を書いてください");return}
+ if(S.energy<=0){alert("今日のエネルギーは終わり。明日0時に回復します");return}
+ S.lastSnapshot={followers:S.followers,energy:S.energy,postCount:S.posts.length};
+ const result=react(txt);
+ S.energy-=1;S.followers=Math.max(0,S.followers+result.delta);
+ S.posts.unshift({text:txt,result:result,at:Date.now()});
+ save();ta.value="";document.getElementById("charCount").textContent="0";render();
+ if(result.verdict!=="normal")showRush(result);
+});
+document.getElementById("btnRewind").addEventListener("click",function(){
+ if(!S.lastSnapshot||S.rewind<=0)return;
+ S.followers=S.lastSnapshot.followers;S.energy=S.lastSnapshot.energy;
+ S.posts.splice(0,S.posts.length-S.lastSnapshot.postCount);
+ S.rewind-=1;S.lastSnapshot=null;save();render();
+ alert("巻き戻しました。あの投稿は、なかったことになりました。");
+});
+document.getElementById("rushClose").addEventListener("click",function(){document.getElementById("rush").classList.add("hidden")});
+document.getElementById("btnFeed").addEventListener("click",render);
+document.getElementById("btnRank").addEventListener("click",function(){
+ const f=S.followers;
+ const rank=f>=500?"界隈の顔":f>=200?"有名人手前":f>=80?"注目新人":f>=30?"駆け出し":"無名";
+ alert("現在の評判："+rank+"\nフォロワー "+f+"人\n投稿 "+S.posts.length+"件");
+});
+document.getElementById("btnReset").addEventListener("click",function(){
+ if(!confirm("セーブを消して最初からにしますか？"))return;
+ localStorage.removeItem(KEY);location.reload();
+});
+(function(){
+ const s=load();
+ if(s&&s.name){document.getElementById("btnContinue").classList.remove("hidden")}
+})();
+</script>
+</body>
+</html>
