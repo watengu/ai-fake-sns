@@ -5,29 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>あなただけが本物 | AI偽SNSゲーム v0</title>
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#14181d;--sub:#5b6570;--line:#e3e7ec;--acc:#ff5c38;--acc2:#7c5cff;--good:#12a150;--bad:#e5484d;--gold:#f5a623}
+:root{--bg:#f6f7f9;--card:#fff;--ink:#14181d;--sub:#5b6570;--line:#e3e7ec;--acc:#ff5c38;--acc2:#ff5c38;--good:#5b6570;--bad:#171a1f;--gold:#5b6570}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;background:var(--bg);color:var(--ink);max-width:520px;margin:0 auto;min-height:100vh}
 button{font:inherit;cursor:pointer;border:none;border-radius:999px}
 input,textarea,select{font:inherit;width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
 .hidden{display:none!important}
 /* invite */
-#invite{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:28px 22px;background:linear-gradient(160deg,#14181d,#2b2140 60%,#4a2130);color:#fff}
+#invite{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:28px 22px;background:#171a1f;color:#fff}
 .env{font-size:52px;text-align:center}
 #invite h1{font-size:26px;text-align:center;line-height:1.5;margin:14px 0 6px}
-#invite p.lead{text-align:center;color:#cfc8e6;font-size:14px;line-height:1.8;margin-bottom:14px}
-#invite p.how{text-align:center;color:#efeaff;font-size:13.5px;line-height:1.8;margin-bottom:26px}
+#invite p.lead{text-align:center;color:#c9ced6;font-size:14px;line-height:1.8;margin-bottom:14px}
+#invite p.how{text-align:center;color:#eef0f3;font-size:13.5px;line-height:1.8;margin-bottom:26px}
 .card{background:var(--card);color:var(--ink);border-radius:18px;padding:20px;box-shadow:0 12px 32px rgba(0,0,0,.35)}
 .card h2{font-size:16px;margin-bottom:12px}
 .card label{font-size:12px;color:var(--sub);display:block;margin:12px 0 5px}
 .tastes{display:grid;gap:8px;margin-top:6px}
 .taste{border:2px solid var(--line);border-radius:12px;padding:11px 13px;text-align:left;background:#fff;width:100%}
-.taste.sel{border-color:var(--acc2);background:#f2efff}
+.taste.sel{border-color:var(--acc);background:#fdf0ec}
 .taste b{font-size:14px}.taste span{display:block;font-size:12px;color:var(--sub);margin-top:2px}
 .btn-main{background:var(--acc);color:#fff;font-weight:700;padding:14px;width:100%;font-size:16px;margin-top:18px}
-.btn-sub{background:transparent;color:#cfc8e6;border:1px solid #6b628c;padding:12px;width:100%;margin-top:10px}
+.btn-sub{background:transparent;color:#c9ced6;border:1px solid #6b7280;padding:12px;width:100%;margin-top:10px}
 .btn-ghost{background:#eef0f3;color:var(--ink);padding:10px 16px;font-size:13px}
-.note{font-size:11px;color:#9a93b8;text-align:center;margin-top:16px;line-height:1.7}
+.note{font-size:11px;color:#9aa3ad;text-align:center;margin-top:16px;line-height:1.7}
 /* app */
 header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px;z-index:5}
 .hrow{display:flex;align-items:center;gap:10px}
@@ -39,7 +39,7 @@ header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:bl
 .chip{flex:1;background:#f0f2f5;border-radius:10px;padding:7px 9px;font-size:12px;text-align:center}
 .chip b{font-size:14px}
 .trend{background:#14181d;color:#fff;font-size:12.5px;padding:8px 14px;white-space:nowrap;overflow:hidden}
-.trend b{color:var(--gold);margin-right:8px}
+.trend b{color:var(--acc);margin-right:8px}
 main{padding:12px 12px 110px}
 .postbox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
 .postbox textarea{border:none;padding:4px;resize:none;font-size:15px}
@@ -48,16 +48,16 @@ main{padding:12px 12px 110px}
 .count{font-size:12px;color:var(--sub);margin-left:auto}
 .btn-post{background:var(--acc);color:#fff;font-weight:700;padding:10px 22px}
 .btn-post:disabled{background:#c9ced6}
-.feedpost{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:10px}
+.feedpost{background:var(--card);border-bottom:1px solid var(--line);padding:14px 6px;margin-bottom:2px}
 .fhead{display:flex;gap:9px;align-items:center;margin-bottom:7px}
 .fhead .avatar{width:34px;height:34px;font-size:13px}
 .fhead b{font-size:14px}.fhead span{font-size:12px;color:var(--sub);display:block}
 .badge{margin-left:auto;font-size:10.5px;padding:3px 8px;border-radius:999px;background:#f0f2f5;color:var(--sub);flex:none}
-.badge.fan{background:#ffe9e4;color:#c23c1d}.badge.anti{background:#fde8e8;color:#b3271e}.badge.media{background:#e7efff;color:#2456c4}.badge.critic{background:#efe9ff;color:#5b3ec9}
+.badge.fan{background:#fdeee9;color:#c23c1d}.badge.anti{background:#eceef1;color:#171a1f}.badge.media{background:#eceef1;color:#3c4450}.badge.critic{background:#eceef1;color:#3c4450}
 .fbody{font-size:14.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word}
 .fmeta{display:flex;gap:18px;font-size:12.5px;color:var(--sub);margin-top:9px}
 .verdict{border-radius:12px;padding:11px 13px;font-size:14px;font-weight:700;margin:4px 0 10px;text-align:center}
-.verdict.normal{background:#eef6ff;color:#2456c4}.verdict.buzz{background:#fff3d6;color:#9a6200;border:1.5px solid var(--gold)}.verdict.flame{background:#fde8e8;color:#b3271e;border:1.5px solid var(--bad)}
+.verdict.normal{background:#eef0f3;color:#3c4450}.verdict.buzz{background:var(--acc);color:#fff;border:1.5px solid var(--acc)}.verdict.flame{background:#171a1f;color:#fff;border:1.5px solid #171a1f}
 .comments{border-top:1px dashed var(--line);margin-top:10px;padding-top:9px;display:grid;gap:9px}
 .comment{display:flex;gap:8px;font-size:13.5px;line-height:1.55}
 .comment .avatar{width:28px;height:28px;font-size:11px}
@@ -68,10 +68,29 @@ main{padding:12px 12px 110px}
 #rush{position:fixed;inset:0;background:rgba(10,10,16,.88);z-index:20;display:flex;flex-direction:column;padding:60px 22px;color:#fff;overflow:hidden}
 #rush h2{font-size:24px;text-align:center;margin-bottom:6px}
 #rush .rsub{text-align:center;color:#ffb4ab;font-size:13px;margin-bottom:22px}
-#rush.buzz .rsub{color:#ffe1a1}
+#rush.buzz .rsub{color:#ffb59d}
 .notif{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:12px 14px;margin-bottom:9px;font-size:14px;animation:pop .3s ease}
 @keyframes pop{from{transform:translateY(14px) scale(.96);opacity:0}to{transform:none;opacity:1}}
 #rushClose{background:#fff;color:#14181d;font-weight:700;padding:14px;margin-top:auto}
+
+.chips{display:flex;gap:7px;overflow-x:auto;padding:9px 12px 2px;background:var(--card)}
+.chipf{flex:none;border:1px solid var(--line);background:#fff;color:#3c4450;border-radius:999px;padding:6px 13px;font-size:12.5px}
+.chipf.on{background:#171a1f;color:#fff;border-color:#171a1f}
+.reqcard{position:sticky;top:118px;z-index:4;background:#fff;border:1.5px solid var(--acc);border-radius:12px;padding:9px 12px;margin:10px 12px 0;display:flex;gap:9px;align-items:center;font-size:13px;line-height:1.5}
+.reqcard .tag{flex:none;background:var(--acc);color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:3px 7px}
+.reqcard button{flex:none;background:#fdf0ec;color:#c23c1d;font-weight:700;padding:8px 12px;font-size:12.5px}
+.awaybar{background:#eef0f3;border-radius:12px;padding:11px 13px;font-size:13px;line-height:1.65;margin-bottom:12px;display:flex;gap:8px}
+.awaybar button{flex:none;background:#fff;padding:6px 11px;font-size:12px}
+.taphead{cursor:pointer}
+.actrow{display:flex;gap:8px;margin-top:9px}
+.actbtn{background:#eef0f3;color:#3c4450;padding:7px 14px;font-size:12.5px}
+.actbtn.on{background:var(--acc);color:#fff}
+#sheet{position:fixed;inset:0;background:#fff;z-index:15;overflow-y:auto;max-width:520px;margin:0 auto;padding:0 16px 40px}
+#sheet .backrow{position:sticky;top:0;background:#fff;padding:12px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;z-index:2}
+.phead{display:flex;gap:12px;align-items:center;padding:16px 0 6px}
+.pbio{font-size:14px;line-height:1.7;padding:4px 0 10px}
+.pmeta{font-size:12.5px;color:var(--sub);padding-bottom:12px;border-bottom:1px solid var(--line)}
+.threadbox{border-top:1.5px solid #171a1f;margin-top:14px;padding-top:10px}
 footer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:rgba(255,255,255,.94);border-top:1px solid var(--line);padding:9px 14px calc(9px + env(safe-area-inset-bottom));display:flex;gap:8px;z-index:5}
 footer button{flex:1;padding:11px;font-size:13.5px;background:#eef0f3}
 footer button.warn{color:var(--bad)}
@@ -119,6 +138,8 @@ footer button.warn{color:var(--bad)}
     </div>
   </header>
   <div class="trend" id="trend"><b>トレンド</b><span id="trendText">#新人クリエイター</span></div>
+  <div class="chips" id="filterChips"></div>
+  <div class="reqcard hidden" id="reqCard"><span class="tag">依頼</span><div style="flex:1" id="reqText"></div><button id="btnReqGo">書いてみる</button></div>
   <main>
     <div class="postbox">
       <textarea id="composer" rows="3" maxlength="140" placeholder="いま何してる？ 投稿は1日5回まで。炎上してもRewindで巻き戻せる。"></textarea>
@@ -131,6 +152,7 @@ footer button.warn{color:var(--bad)}
     <div class="rewindbar">
       <button class="btn-ghost" id="btnRewind">↩ 直前の投稿を巻き戻す</button>
     </div>
+    <div class="awaybar hidden" id="awayBar"><div style="flex:1" id="awayText"></div><button id="btnAwayClose">閉じる</button></div>
     <div id="feed"></div>
     <p class="small">これはゲームです。フォロワーもコメントも、すべてAIが演じています。</p>
   </main>
@@ -139,6 +161,12 @@ footer button.warn{color:var(--bad)}
     <button id="btnRank">📈 評判</button>
     <button class="warn" id="btnReset">最初から</button>
   </footer>
+</section>
+
+<!-- PROFILE SHEET -->
+<section id="sheet" class="hidden">
+  <div class="backrow"><button class="btn-ghost" id="btnSheetBack">← フィードに戻る</button><b style="font-size:15px">プロフィール</b></div>
+  <div id="sheetBody"></div>
 </section>
 
 <!-- NOTIFICATION RUSH -->
@@ -153,18 +181,18 @@ footer button.warn{color:var(--bad)}
 "use strict";
 const KEY="aiFakeSnsV0";
 const CHARS=[
- {n:"古参のタヌキ",h:"tanuki_old",t:"fan",c:"#8a5a2b"},
- {n:"ミント推し活中",h:"mint_oshi",t:"fan",c:"#12a150"},
- {n:"現場猫",h:"genba_neko",t:"fan",c:"#e8871e"},
- {n:"辛口レビュー屋",h:"karakuchi",t:"critic",c:"#5b3ec9"},
- {n:"数字で語る人",h:"data_man",t:"critic",c:"#2456c4"},
- {n:"アンチ常駐",h:"anti_joshu",t:"anti",c:"#e5484d"},
- {n:"揚げ足とり職人",h:"ageashi",t:"anti",c:"#b3271e"},
- {n:"ネットニュース速報",h:"news_sokuho",t:"media",c:"#2456c4"},
- {n:"界隈ウォッチャー",h:"watcher_k",t:"media",c:"#0f766e"},
- {n:"ライバルのソラ",h:"sora_rival",t:"rival",c:"#7c5cff"},
+ {n:"古参のタヌキ",h:"tanuki_old",t:"fan",c:"#6b7280"},
+ {n:"ミント推し活中",h:"mint_oshi",t:"fan",c:"#ff5c38"},
+ {n:"現場猫",h:"genba_neko",t:"fan",c:"#9aa3ad"},
+ {n:"辛口レビュー屋",h:"karakuchi",t:"critic",c:"#3c4450"},
+ {n:"数字で語る人",h:"data_man",t:"critic",c:"#5b6570"},
+ {n:"アンチ常駐",h:"anti_joshu",t:"anti",c:"#171a1f"},
+ {n:"揚げ足とり職人",h:"ageashi",t:"anti",c:"#4a5058"},
+ {n:"ネットニュース速報",h:"news_sokuho",t:"media",c:"#5b6570"},
+ {n:"界隈ウォッチャー",h:"watcher_k",t:"media",c:"#8a939e"},
+ {n:"ライバルのソラ",h:"sora_rival",t:"rival",c:"#ff5c38"},
  {n:"通りすがりの一般人",h:"ippanjin",t:"fan",c:"#5b6570"},
- {n:"深夜の住人",h:"shinya_junin",t:"anti",c:"#374151"}
+ {n:"深夜の住人",h:"shinya_junin",t:"anti",c:"#2b3038"}
 ];
 const AI_POSTS=[
  ["界隈ウォッチャー","watcher_k","media","今日の新人クリエイター界隈、誰がバズって誰が消えるか。毎日が総選挙。"],
@@ -175,6 +203,36 @@ const AI_POSTS=[
  ["現場猫","genba_neko","fan","今日も現場（タイムライン）にいます。よし！"],
  ["数字で語る人","data_man","critic","フォロワー数は結果であって目的ではない。と言いながら全員数字を見ている。"],
  ["深夜の住人","shinya_junin","anti","深夜のポエム投稿は翌朝スクショされる。法則。"]
+];
+const BIOS={
+ tanuki_old:{bio:"界隈の古参。推しは推せるうちに推すが信条。",rel:"古参ファン",foll:3200},
+ mint_oshi:{bio:"新人を発掘しては布教するアカウント。",rel:"ファン",foll:860},
+ genba_neko:{bio:"現場（タイムライン）に毎日いる。安全第一。",rel:"ファン",foll:5400},
+ karakuchi:{bio:"辛口レビュー。褒める時は本気で褒める。",rel:"批評家",foll:12800},
+ data_man:{bio:"数字で語る。感情では語らない（はず）。",rel:"批評家",foll:4700},
+ anti_joshu:{bio:"アンチ常駐。でも毎日見ている。",rel:"アンチ",foll:310},
+ ageashi:{bio:"揚げ足取りが趣味。スクショは証拠。",rel:"アンチ",foll:190},
+ news_sokuho:{bio:"界隈ニュースを速報するメディア垢。",rel:"メディア",foll:45200},
+ watcher_k:{bio:"新人クリエイター界隈の観測者。",rel:"メディア",foll:9800},
+ sora_rival:{bio:"同じ新人枠のライバル。再生数は聞くな。",rel:"ライバル",foll:1500},
+ ippanjin:{bio:"通りすがりの一般人。たまに刺さる。",rel:"ファン",foll:88},
+ shinya_junin:{bio:"深夜にだけ現れる住人。",rel:"アンチ",foll:640}
+};
+const GEN_TEXTS=[
+ {text:"新作の制作過程を少しだけ公開。完成まで見届けて。",topic:"新作"},
+ {text:"今日の練習記録。地味だけどこれが一番伸びる。",topic:"練習"},
+ {text:"配信ありがとうございました。来てくれた人全員に感謝。",topic:"配信"},
+ {text:"新しい動画を編集中。今回はテンポを変えてみた。",topic:"動画"},
+ {text:"正直スランプです。でも手は止めない。",topic:"本音"},
+ {text:"昨日の投稿、思ったより反応があって驚いてる。",topic:"反応"},
+ {text:"次の告知は明日。ちょっと大きな話です。",topic:"告知"},
+ {text:"機材を新しくした。音が全然違う。",topic:"制作"}
+];
+const REQUESTS=[
+ {from:"news_sokuho",text:"「新作」の話が読みたい。あなたの新作について投稿してみて",keys:["新作","できました","公開","完成"],tpl:"新作ができました！ 見てほしい"},
+ {from:"sora_rival",text:"宣言系が見たい。「負けない」と言い切ってみて",keys:["負け","絶対","最強","有名"],tpl:"絶対に負けない。ここから有名になります"},
+ {from:"tanuki_old",text:"感謝の投稿は伸びる。支えてくれる人への一言を",keys:["ありがとう","感謝"],tpl:"いつもありがとう。支えてくれる人へ感謝を込めて"},
+ {from:"karakuchi",text:"たまには正直な弱音を。悔しい気持ちを書いてみて",keys:["悔しい","正直","スランプ","弱音"],tpl:"正直、悔しい。でもここで止まらない"}
 ];
 const TRENDS=["#新人クリエイター","#今日のバズ","#界隈の闇","#推し活日記","#深夜のポエム注意報","#新人総選挙","#スクショは証拠"];
 const HINTS=["今日から本気出す。まずは毎日投稿から。絶対に有名になる。","新作できました！ 3ヶ月かけたので聞いてほしい","正直、昨日の投稿が伸びなかったの悔しい。でも続けます","ごめんなさい、昨日の発言は言い過ぎでした","質問です。みんなはスランプの時どうしてる？","支えてくれる人いつもありがとう。今日は感謝だけ伝えたい","ライバルがバズってて正直焦ってる。でも負けません"];
@@ -190,9 +248,28 @@ function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a}
 function pick(arr){return arr[rnd(0,arr.length-1)]}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a}
 function todayStr(){const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
-function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+function save(){S.lastSeenAt=Date.now();localStorage.setItem(KEY,JSON.stringify(S))}
 function load(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return null}}
-function initial(name,handle,tz){return{name:name,handle:handle,taste:tz,followers:12,energy:5,rewind:2,day:todayStr(),posts:[],lastSnapshot:null,feedSeed:rnd(0,999)}}
+function initial(name,handle,tz){return{name:name,handle:handle,taste:tz,followers:12,energy:5,rewind:2,day:todayStr(),posts:[],lastSnapshot:null,feedSeed:rnd(0,999),timeline:[],following:{},reqIndex:0,reqDone:0,filter:"all",lastSeenAt:Date.now()}}
+function charByH(h){return CHARS.find(function(c){return c.h===h})||CHARS[0]}
+function genAiPost(){
+ const base=pick(AI_POSTS);const useGen=Math.random()<0.45;
+ const ch=charByH(useGen?pick(CHARS).h:base[1]);
+ const g=pick(GEN_TEXTS);
+ const text=useGen?g.text:base[3];
+ const topic=useGen?g.topic:"界隈";
+ const others=shuffle(CHARS.filter(function(c){return c.h!==ch.h}));
+ const comments=others.slice(0,rnd(2,4)).map(function(oc){const kind=oc.t==="rival"?"rival":oc.t;return{h:oc.h,line:pick(LINES[kind]||LINES.fan)}});
+ return{id:"ai"+Date.now()+rnd(0,99999),h:ch.h,text:text,topic:topic,likes:rnd(3,420),rps:rnd(0,60),comments:comments};
+}
+function ensureState(){
+ if(!S.timeline||!S.timeline.length){S.timeline=[];for(let i=0;i<8;i++)S.timeline.push(genAiPost())}
+ if(!S.following)S.following={};
+ if(S.reqIndex===undefined)S.reqIndex=0;
+ if(S.reqDone===undefined)S.reqDone=0;
+ if(!S.filter)S.filter="all";
+}
+function curRequest(){return REQUESTS[S.reqIndex%REQUESTS.length]}
 function refreshDay(){if(S&&S.day!==todayStr()){S.day=todayStr();S.energy=5;save()}}
 function esc(s){return s.replace(/[&<>"']/g,function(m){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]})}
 function avTxt(n){return n.slice(0,1)}
@@ -206,7 +283,7 @@ function detectType(txt){
  if(/ありがとう|感謝/.test(txt))return"thanks";
  return"daily";
 }
-function react(txt){
+function react(txt,boost){
  const type=detectType(txt);
  let pool=[];
  CHARS.forEach(function(ch){pool.push(ch)});
@@ -219,7 +296,7 @@ function react(txt){
  pool.forEach(function(ch){const w=weights[ch.t]||1;for(let i=0;i<w;i++)bag.push(ch)});
  const chosen=[];const seen={};
  shuffle(bag).forEach(function(ch){if(!seen[ch.h]&&chosen.length<rnd(3,6)){seen[ch.h]=1;chosen.push(ch)}});
- let score=rnd(-16,32);
+ let score=rnd(-16,32)+(boost?16:0);
  if(type==="provoke")score+=rnd(-20,30);
  if(type==="announce")score+=rnd(0,18);
  if(type==="apology")score+=rnd(-2,10);
@@ -263,7 +340,7 @@ function feedHTML(){
    if(p.result){
      const v=p.result.verdict;
      const label=v==="buzz"?"🚀 バズりました":(v==="flame"?"🔥 炎上しました":"📣 反応がつきました");
-     html+='<div class="verdict '+v+'">'+label+'　フォロワー '+(p.result.delta>=0?"+":"")+p.result.delta+'</div>';
+     html+='<div class="verdict '+v+'">'+label+'　フォロワー '+(p.result.delta>=0?"+":"")+p.result.delta+(p.result.req?'　🎯 依頼達成！':'')+'</div>';
      html+='<div class="fmeta"><span>♥ '+p.result.likes.toLocaleString()+'</span><span>🔁 '+p.result.rps.toLocaleString()+'</span><span>💬 '+p.result.comments.length+'</span></div>';
      html+='<div class="comments">';
      p.result.comments.forEach(function(cm){
@@ -273,17 +350,75 @@ function feedHTML(){
    }
    html+='</article>';
  });
- shuffle(AI_POSTS).slice(0,5).forEach(function(a){
-   const ch=CHARS.find(function(c){return c.h===a[1]})||CHARS[0];
-   html+='<article class="feedpost"><div class="fhead">'+charAv(ch,34)+'<div><b>'+esc(a[0])+'</b><span>@'+a[1]+'</span></div>'+badge(a[2])+'</div><div class="fbody">'+esc(a[3])+'</div><div class="fmeta"><span>♥ '+rnd(3,420)+'</span><span>🔁 '+rnd(0,60)+'</span></div></article>';
+ const list=S.timeline.filter(function(a){return S.filter==="all"||a.topic===S.filter});
+ list.forEach(function(a){
+   const ch=charByH(a.h);
+   html+='<article class="feedpost"><div class="fhead taphead" onclick="openProfile(\''+a.h+'\',\''+a.id+'\')">'+charAv(ch,34)+'<div><b>'+esc(ch.n)+'</b><span>@'+a.h+' ・ #'+esc(a.topic)+'</span></div>'+badge(ch.t)+'</div>';
+   html+='<div class="fbody taphead" onclick="openProfile(\''+a.h+'\',\''+a.id+'\')">'+esc(a.text)+'</div>';
+   html+='<div class="actrow"><button class="actbtn" onclick="openProfile(\''+a.h+'\',\''+a.id+'\')">💬 コメント '+a.comments.length+'</button><button class="actbtn" onclick="openProfile(\''+a.h+'\',null)">プロフィール</button></div>';
+   html+='<div class="fmeta"><span>♥ '+a.likes.toLocaleString()+'</span><span>🔁 '+a.rps.toLocaleString()+'</span></div></article>';
  });
+ if(!list.length)html+='<p class="small">この話題の投稿はまだありません。</p>';
  return html;
 }
-function render(){renderHead();document.getElementById("feed").innerHTML=feedHTML();
+function renderChips(){
+ const topics=["all"];S.timeline.forEach(function(a){if(topics.indexOf(a.topic)<0)topics.push(a.topic)});
+ document.getElementById("filterChips").innerHTML=topics.map(function(t){
+   return '<button class="chipf'+(S.filter===t?" on":"")+'" onclick="setFilter(\''+t+'\')">'+(t==="all"?"すべて":"#"+esc(t))+'</button>';
+ }).join("");
+}
+function setFilter(t){S.filter=t;save();render()}
+function renderReq(){
+ const card=document.getElementById("reqCard");
+ const req=curRequest();const from=charByH(req.from);
+ document.getElementById("reqText").innerHTML='<b>'+esc(from.n)+'</b> からの依頼：'+esc(req.text)+'（達成 '+S.reqDone+' 件）';
+ card.classList.remove("hidden");
+}
+function openProfile(h,postId){
+ const ch=charByH(h);const bio=BIOS[h]||{bio:"",rel:"",foll:0};
+ const posts=S.timeline.filter(function(a){return a.h===h});
+ let html='<div class="phead">'+charAv(ch,54)+'<div><b style="font-size:17px">'+esc(ch.n)+'</b><br><span style="color:var(--sub);font-size:12.5px">@'+h+'</span></div></div>';
+ html+='<div class="pbio">'+esc(bio.bio)+'</div>';
+ html+='<div class="pmeta">'+esc(bio.rel)+' ・ フォロワー '+bio.foll.toLocaleString()+'人 ・ 投稿 '+posts.length+'件</div>';
+ html+='<div style="padding:12px 0 2px"><button class="actbtn'+(S.following[h]?" on":"")+'" id="btnFollow">'+(S.following[h]?"フォロー中":"フォローする")+'</button></div>';
+ const focus=postId?S.timeline.find(function(a){return a.id===postId}):null;
+ if(focus){
+   html+='<div class="threadbox"><b style="font-size:14px">この投稿へのコメント</b><div class="fbody" style="margin:8px 0">'+esc(focus.text)+'</div><div class="comments" style="border:none">';
+   focus.comments.forEach(function(cm){const cc=charByH(cm.h);
+     html+='<div class="comment">'+charAv(cc,28)+'<div><b>'+esc(cc.n)+'</b> <span>@'+cm.h+'</span><br>'+esc(cm.line)+'</div></div>';});
+   html+='</div></div>';
+ }
+ html+='<div class="threadbox"><b style="font-size:14px">'+esc(ch.n)+' の投稿</b></div>';
+ posts.forEach(function(a){
+   html+='<article class="feedpost"><div class="fbody taphead" onclick="openProfile(\''+h+'\',\''+a.id+'\')">'+esc(a.text)+'</div><div class="fmeta"><span>♥ '+a.likes+'</span><span>💬 '+a.comments.length+'</span><span>#'+esc(a.topic)+'</span></div></article>';
+ });
+ document.getElementById("sheetBody").innerHTML=html;
+ document.getElementById("sheet").classList.remove("hidden");
+ document.getElementById("btnFollow").addEventListener("click",function(){
+   if(S.following[h]){delete S.following[h]}else{S.following[h]=1}
+   save();openProfile(h,postId);
+ });
+ window.scrollTo(0,0);
+}
+function render(){ensureState();renderHead();renderChips();renderReq();document.getElementById("feed").innerHTML=feedHTML();
  document.getElementById("btnPost").disabled=(S.energy<=0);
  document.getElementById("btnRewind").disabled=!(S.lastSnapshot&&S.rewind>0);
 }
-function showApp(){document.getElementById("invite").classList.add("hidden");document.getElementById("app").classList.remove("hidden");refreshDay();render()}
+function showApp(){
+ document.getElementById("invite").classList.add("hidden");document.getElementById("app").classList.remove("hidden");
+ refreshDay();ensureState();
+ const gapMin=(Date.now()-(S.lastSeenAt||Date.now()))/60000;
+ if(S.posts.length>0&&gapMin>=10){
+   const n=Math.min(3,1+Math.floor(gapMin/60));let made=0;
+   for(let i=0;i<n;i++){S.timeline.unshift(genAiPost());made++}
+   const latest=S.posts[0];
+   const reactCount=latest&&latest.result?latest.result.comments.length:0;
+   document.getElementById("awayText").textContent="おかえりなさい。留守の間に新着のAI投稿が "+made+" 件届きました。あなたの最新の投稿には "+reactCount+" 件の反応がついています。";
+   document.getElementById("awayBar").classList.remove("hidden");
+   save();
+ }
+ render();
+}
 function showRush(result){
  const rush=document.getElementById("rush");
  rush.classList.remove("hidden");rush.classList.toggle("buzz",result.verdict==="buzz");
@@ -315,7 +450,9 @@ document.getElementById("btnPost").addEventListener("click",function(){
  if(!txt){alert("投稿文を書いてください");return}
  if(S.energy<=0){alert("今日のエネルギーは終わり。明日0時に回復します");return}
  S.lastSnapshot={followers:S.followers,energy:S.energy,postCount:S.posts.length};
- const result=react(txt);
+ const req=curRequest();const matched=req.keys.some(function(k){return txt.indexOf(k)>=0});
+ const result=react(txt,matched);result.req=matched;
+ if(matched){S.reqDone+=1;S.reqIndex=(S.reqIndex+1)%REQUESTS.length}
  S.energy-=1;S.followers=Math.max(0,S.followers+result.delta);
  S.posts.unshift({text:txt,result:result,at:Date.now()});
  save();ta.value="";document.getElementById("charCount").textContent="0";render();
@@ -329,7 +466,16 @@ document.getElementById("btnRewind").addEventListener("click",function(){
  alert("巻き戻しました。あの投稿は、なかったことになりました。");
 });
 document.getElementById("rushClose").addEventListener("click",function(){document.getElementById("rush").classList.add("hidden")});
-document.getElementById("btnFeed").addEventListener("click",render);
+document.getElementById("btnReqGo").addEventListener("click",function(){
+ const ta=document.getElementById("composer");ta.value=curRequest().tpl;
+ document.getElementById("charCount").textContent=ta.value.length;ta.focus();
+ window.scrollTo({top:0,behavior:"smooth"});
+});
+document.getElementById("btnSheetBack").addEventListener("click",function(){document.getElementById("sheet").classList.add("hidden")});
+document.getElementById("btnAwayClose").addEventListener("click",function(){document.getElementById("awayBar").classList.add("hidden")});
+document.getElementById("btnFeed").addEventListener("click",function(){
+ ensureState();S.timeline.unshift(genAiPost());if(S.timeline.length>30)S.timeline.length=30;save();render();
+});
 document.getElementById("btnRank").addEventListener("click",function(){
  const f=S.followers;
  const rank=f>=500?"界隈の顔":f>=200?"有名人手前":f>=80?"注目新人":f>=30?"駆け出し":"無名";
