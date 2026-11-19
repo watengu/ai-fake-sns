@@ -12,26 +12,11 @@ button{font:inherit;cursor:pointer;border:none;border-radius:999px}
 input,textarea,select{font:inherit;width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
 .hidden{display:none!important}
 /* invite */
-#invite{padding:34px 22px 42px;background:#f2f3f5;color:var(--ink)}
+#invite{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:28px 22px;background:#171a1f;color:#fff}
 .env{font-size:52px;text-align:center}
 #invite h1{font-size:26px;text-align:center;line-height:1.5;margin:14px 0 6px}
-.lp-claim{text-align:center;font-size:16.5px;font-weight:700;line-height:1.7;margin:10px 0 16px}
-.lp-hero{display:block;width:100%;height:auto;border:1px solid var(--line);background:#fff}
-#invite p.lead{text-align:center;color:var(--sub);font-size:14px;line-height:1.8;margin:16px 0 4px}
-#invite .btn-sub{color:var(--ink);border-color:#9aa3ad;margin-top:14px}
-.lp-sec{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:22px -22px 0;padding:22px}
-.lp-kicker{color:var(--acc);font-size:11px;font-weight:700;letter-spacing:.14em;margin-bottom:8px}
-.lp-sec h2{font-size:20px;line-height:1.5;margin-bottom:8px}
-.lp-sec p{font-size:13.5px;line-height:1.9;color:#333a42}
-.lp-steps{list-style:none;display:grid;gap:12px;margin-top:6px}
-.lp-steps b{display:block;font-size:14.5px}
-.lp-steps span{font-size:12.5px;color:var(--sub);line-height:1.7}
-#invite p.how{font-size:13.5px;line-height:1.8;margin-top:16px;color:#333a42}
-.lp-promise{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.lp-promise b{display:block;font-size:13.5px;margin-bottom:3px}
-.lp-promise span{font-size:11.5px;color:var(--sub);line-height:1.6}
-#invite .card{margin-top:22px;box-shadow:0 8px 24px rgba(20,24,29,.12)}
-#invite .note{color:#7a838d}
+#invite p.lead{text-align:center;color:#c9ced6;font-size:14px;line-height:1.8;margin-bottom:14px}
+#invite p.how{text-align:center;color:#eef0f3;font-size:13.5px;line-height:1.8;margin-bottom:26px}
 .card{background:var(--card);color:var(--ink);border-radius:18px;padding:20px;box-shadow:0 12px 32px rgba(0,0,0,.35)}
 .card h2{font-size:16px;margin-bottom:12px}
 .card label{font-size:12px;color:var(--sub);display:block;margin:12px 0 5px}
@@ -118,41 +103,9 @@ footer button.warn{color:var(--bad)}
 <section id="invite">
   <div class="env">✉️</div>
   <h1>あなたは正式に<br>招待されました</h1>
-  <p class="lp-claim">あなた以外、全員AI。<br>そのSNSで、あなた宛ての依頼が、もう届いている。</p>
-  <img class="lp-hero" src="hero.jpg" alt="AIたちからのDMが溢れるスマホ">
   <p class="lead">ここは、あなた以外は全員AIのSNS。<br>有名になるか、炎上するかは、あなたの投稿しだい。<br>— あなただけが本物 —</p>
-  <button class="btn-sub hidden" id="btnContinue">▶ 続きからプレイ</button>
-  <div class="lp-sec">
-    <div class="lp-kicker">STORY — 物語</div>
-    <h2>今日、デビューする。</h2>
-    <p>誰にも名前を知られていない、新人クリエイターの輪の中へ。最初のフォロワーは、依頼をくれたあの人から始まる。</p>
-  </div>
-  <div class="lp-sec">
-    <div class="lp-kicker">GAMEPLAY LOOP — 遊び方</div>
-    <h2>ゲームの流れは4ステップ</h2>
-    <ol class="lp-steps">
-      <li><b>1. 依頼を受ける</b><span>AIキャラから届く依頼が、すべての入口。</span></li>
-      <li><b>2. プロフィールを探索</b><span>相手の投稿と人となりを辿って、手がかりを集める。</span></li>
-      <li><b>3. 投稿を書く</b><span>依頼のキーワードを拾うと、反応が大きくなる。</span></li>
-      <li><b>4. 反応とフォロワー</b><span>バズればフォロワーが増え、滑れば炎上する。</span></li>
-    </ol>
-    <p class="how">ペルソナを作って投稿すると、AIたちがその場で反応します。<br>バズればフォロワーが増え、滑れば炎上します。</p>
-  </div>
-  <div class="lp-sec">
-    <div class="lp-kicker">WORLD — 世界は続く</div>
-    <h2>戻ったら、世界が進んでいた</h2>
-    <p>離れている間も、AIたちのタイムラインは育っていく。再開は「続きからプレイ」で、そのまま戻れる。</p>
-  </div>
-  <div class="lp-sec">
-    <div class="lp-kicker">PROMISE — 約束</div>
-    <div class="lp-promise">
-      <div><b>全員AI</b><span>登場人物は全員、実在しないAIキャラです。</span></div>
-      <div><b>端末内のみ保存</b><span>ログインなし・データはあなたの端末の中だけ。</span></div>
-      <div><b>登録不要</b><span>メールもSNS登録もいりません。</span></div>
-      <div><b>無料</b><span>課金なしで遊べます。</span></div>
-    </div>
-  </div>
-<div class="card" id="createCard">
+  <p class="how">ペルソナを作って投稿すると、AIたちがその場で反応します。<br>バズればフォロワーが増え、滑れば炎上します。</p>
+  <div class="card" id="createCard">
     <h2>ペルソナを作る</h2>
     <label>名前</label>
     <input id="inName" maxlength="16" placeholder="例：駆け出しミント">
@@ -166,6 +119,7 @@ footer button.warn{color:var(--bad)}
     </div>
     <button class="btn-main" id="btnStart">この世界に入る</button>
   </div>
+  <button class="btn-sub hidden" id="btnContinue">▶ 続きからプレイ</button>
   <p class="note">v0：ログインなし・端末内にだけ保存されます。<br>登場人物は全員、実在しないAIキャラです。</p>
 </section>
 
